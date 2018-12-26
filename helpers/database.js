@@ -387,7 +387,7 @@ async function getDatabaseConnection() {
 				 var conn = mysql.createConnection({
 					user: fs.readFileSync(initConfig.configPath.trim() + 'db_user.txt', 'utf8').trim(),
 					password: fs.readFileSync(initConfig.configPath.trim() + 'db_pass.txt', 'utf8').trim(),
-					host:'localhost',
+					host: fs.readFileSync(initConfig.configPath.trim() + 'db_host.txt', 'utf8').trim(),
 					database: 'AffordableHousingDataHub'
 				});
 			}
@@ -425,4 +425,3 @@ module.exports.getAllPropertyVerifications = getAllPropertyVerifications;
 module.exports.getAllProperties = getAllProperties;
 module.exports.getAllPropertiesAllFields = getAllPropertiesAllFields;
 module.exports.createProperty = createProperty;
-
