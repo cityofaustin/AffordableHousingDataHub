@@ -3,3 +3,8 @@
 /logs/*
 /config/
 config_path.txt
+
+# MISC
+.DS_Store
+.env
+.vscode/*

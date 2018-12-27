@@ -7,6 +7,9 @@ const thisFilename = 'database.js';
 const _ = require('underscore');
 const moment = require('moment');
 
+//TODO: use env variables
+//const dotenv = require('dotenv');
+
 async function updateData(updateDataObj, propertyId, user_id) {
 	// TODO: if there is no propertyId, throw error
 
@@ -382,13 +385,35 @@ async function getDatabaseConnection() {
 					password: fs.readFileSync(initConfig.configPath.trim() + 'db_pass.txt', 'utf8').trim(),
 					host:'localhost',
 					database: 'AffordableHousingDataHub',
+					//TODO: use env variables
+					//user: process.env.DB_USER,
+					//password: process.env.DB_PASSWORD,
+					//host: process.env.DB_HOST,
+					//database: process.env.DB_NAME,
 				});
-			} else if (process.env.NODE_ENV == 'PRODUCTION') {
+			} else if (process.env.NODE_ENV == 'TEST'){
 				 var conn = mysql.createConnection({
 					user: fs.readFileSync(initConfig.configPath.trim() + 'db_user.txt', 'utf8').trim(),
 					password: fs.readFileSync(initConfig.configPath.trim() + 'db_pass.txt', 'utf8').trim(),
 					host: fs.readFileSync(initConfig.configPath.trim() + 'db_host.txt', 'utf8').trim(),
 					database: 'AffordableHousingDataHub'
+					//TODO: use env variables
+					//user: process.env.DB_USER,
+					//password: process.env.DB_PASSWORD,
+					//host: process.env.DB_HOST,
+					//database: process.env.DB_NAME
+
+			}else {
+				 var conn = mysql.createConnection({
+					user: fs.readFileSync(initConfig.configPath.trim() + 'db_user.txt', 'utf8').trim(),
+					password: fs.readFileSync(initConfig.configPath.trim() + 'db_pass.txt', 'utf8').trim(),
+					host: fs.readFileSync(initConfig.configPath.trim() + 'db_host.txt', 'utf8').trim(),
+					database: 'AffordableHousingDataHub'
+					//TODO: use env variables
+					//user: process.env.DB_USER,
+					//password: process.env.DB_PASSWORD,
+					//host: process.env.DB_HOST,
+					//database: process.env.DB_NAME,
 				});
 			}
 
