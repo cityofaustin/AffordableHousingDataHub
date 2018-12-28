@@ -7,8 +7,8 @@ const thisFilename = 'database.js';
 const _ = require('underscore');
 const moment = require('moment');
 
-//TODO: use env variables
-//const dotenv = require('dotenv');
+//use env variables
+const dotenv = require('dotenv');
 
 async function updateData(updateDataObj, propertyId, user_id) {
 	// TODO: if there is no propertyId, throw error
@@ -27,19 +27,19 @@ async function updateData(updateDataObj, propertyId, user_id) {
 			// update PropertyVerifications
 			if (!(verify == undefined)) {
 				var verifyExists = await query(
-					'AffordableHousingDataHub',
+					'AffordableHousingDataHub', //TODO: add env variable for db_name
 					`SELECT id from PropertyVerifications WHERE field = '${field}' AND property_id = ${propertyId}`
 				);
 
 				if (verifyExists.length > 0) {
 					var verifyId = verifyExists[0].id;
 					await query(
-						'AffordableHousingDataHub',
+						'AffordableHousingDataHub', //TODO: add env variable for db_name
 						`UPDATE PropertyVerifications SET verified = ${verify}, last_updated = '${moment().format('YYYY-MM-DD HH:mm:ss')}', updated_by_user_id=${mysql.escape(user_id)} WHERE id = ${verifyId}`
 					);
 				} else {
 					await query(
-						'AffordableHousingDataHub',
+						'AffordableHousingDataHub', //TODO: add env variable for db_name
 						`INSERT INTO PropertyVerifications (verified, property_id, field, last_updated, updated_by_user_id) VALUES (${mysql.escape(verify)}, ${mysql.escape(propertyId)}, ${mysql.escape(field)}, '${moment().format('YYYY-MM-DD HH:mm:ss')}', ${mysql.escape(user_id)})`
 					);
 				}
@@ -51,7 +51,7 @@ async function updateData(updateDataObj, propertyId, user_id) {
 				// check that field is in fieldsMap, and that it is active
 				// run sql command to update that one field
 				await query(
-					'AffordableHousingDataHub',
+					'AffordableHousingDataHub', //TODO: add env variable for db_name
 					`UPDATE Properties SET ${field} = ${mysql.escape(value)} WHERE id =${mysql.escape(propertyId)}`
 				);
 			}
@@ -66,7 +66,7 @@ async function updateSessionId(userId, sessionId) {
 		try {
 			var conn = await getDatabaseConnection();
 			var sql = `UPDATE Users SET session_id =${mysql.escape(sessionId)} WHERE id=${mysql.escape(userId)}`;
-			await queryDatabase(conn, 'AffordableHousingDataHub', sql);
+			await queryDatabase(conn, 'AffordableHousingDataHub', sql); //TODO: add env variable for db_name
 		} catch(e) {
 			error = new Error(thisFilename + ' => updateSessionID(), caught exception:\n' + e.stack);
 		} finally {
@@ -88,7 +88,7 @@ async function doesUserExist(email, pass) {
 			var conn = await getDatabaseConnection();
 			var res = await queryDatabase(
 				conn,
-				'AffordableHousingDataHub',
+				'AffordableHousingDataHub', //TODO: add env variable for db_name
 				`SELECT * FROM Users WHERE email=${mysql.escape(email)}`
 			);
 			if (res.length > 1) {
@@ -120,7 +120,7 @@ async function getUser(email) {
 		var conn = await getDatabaseConnection();
 		var res = await queryDatabase(
 			conn,
-			'AffordableHousingDataHub',
+			'AffordableHousingDataHub', //TODO: add env variable for db_name
 			`SELECT * FROM Users WHERE email = ${mysql.escape(email)}`
 		);
 		await closeDatabaseConnection(conn);
@@ -141,7 +141,7 @@ async function createUser(firstName, lastName, org, email, passwd) {
 			var passwdHash = bcrypt.hashSync(passwd, 11);
 			var results = await queryDatabase(
 				conn,
-				'AffordableHousingDataHub',
+				'AffordableHousingDataHub', //TODO: add env variable for db_name
 				`INSERT INTO Users (first_name, last_name, org, email, passwd) VALUES (${mysql.escape(firstName)}, ${mysql.escape(lastName)}, ${mysql.escape(org)}, ${mysql.escape(email)}, ${mysql.escape(passwdHash)})`
 			);
 			await closeDatabaseConnection(conn);
@@ -158,7 +158,7 @@ async function getUpdatePropertiesList() {
 	// TODO: error handling
 
 	var res = query(
-		'AffordableHousingDataHub',
+		'AffordableHousingDataHub', //TODO: add env variable for db_name
 		'SELECT property_name, funding_source_aahc, funding_source_hatc, funding_source_tdhca, funding_source_nhcd, data_source_ahi, data_source_tdhca, data_source_atc_guide, Properties.id, property_name, address, phone, Properties.email as email, website, city, total_income_restricted_units, total_section_8_units, zipcode, Users.email as assigned_user_email FROM Properties LEFT JOIN Users ON Properties.assigned_user_id = Users.id WHERE is_duplicate != 1 AND NOT (outside_etj <=> 1)'
 	);
 
@@ -229,7 +229,7 @@ async function getAllProperties() {
 	];
 	var fieldsString = includeFields.join(', ');
 	var res = await query(
-		'AffordableHousingDataHub',
+		'AffordableHousingDataHub', //TODO: add env variable for db_name
 		`SELECT ${fieldsString} FROM Properties WHERE is_duplicate != 1 AND NOT (outside_etj <=> 1)`
 	);
 	return res;
@@ -237,7 +237,7 @@ async function getAllProperties() {
 
 async function getAllPropertiesAllFields() {
 	var res = await query(
-		'AffordableHousingDataHub',
+		'AffordableHousingDataHub', //TODO: add env variable for db_name
 		'SELECT * FROM Properties where is_duplicate != 1 AND NOT (outside_etj <=> 1)'
 	);
 	return res;
@@ -259,7 +259,7 @@ async function query(db, query) {
 async function getProperty(id) {
 	// TODO: properly handle errors
 	var res = await query(
-		'AffordableHousingDataHub',
+		'AffordableHousingDataHub', //TODO: add env variable for db_name
 		`SELECT * from Properties WHERE id = ${id}`
 	);
 	return res;
@@ -280,7 +280,7 @@ async function getPropertyVerifications(id) {
 
 	// TODO: error handling
 	var res = await query(
-		'AffordableHousingDataHub',
+		'AffordableHousingDataHub', //TODO: add env variable for db_name
 		`SELECT  * from PropertyVerifications LEFT JOIN Users ON updated_by_user_id = Users.id WHERE property_id = ${id} `
 	);
 	return reformat(res);
@@ -302,7 +302,7 @@ async function getAllPropertyVerifications() {
 		}
 	}
 	var res = await query(
-		'AffordableHousingDataHub',
+		'AffordableHousingDataHub', //TODO: add env variable for db_name
 		`SELECT * from PropertyVerifications`
 	);
 	return reformat(res);
@@ -310,7 +310,7 @@ async function getAllPropertyVerifications() {
 
 async function getPropertyAssignedUser(id) {
 	var res = await query(
-		'AffordableHousingDataHub',
+		'AffordableHousingDataHub', //TODO: add env variable for db_name
 		`SELECT assigned_user_id, Users.email from Properties INNER JOIN Users ON Properties.assigned_user_id = Users.id WHERE Properties.id = ${id}`
 	);
 	return res;
@@ -320,7 +320,7 @@ async function unassignUser(id) {
 	// TODO: need to error handle properly
 	if (id) {
 		var res = await query(
-			'AffordableHousingDataHub',
+			'AffordableHousingDataHub', //TODO: add env variable for db_name
 			`UPDATE Properties SET assigned_user_id = NULL WHERE id = ${id}`
 		);
 		return true
@@ -330,7 +330,7 @@ async function unassignUser(id) {
 
 async function createProperty(name, address, city, state, zip) {
 	var result = await query(
-		'AffordableHousingDataHub',
+		'AffordableHousingDataHub', //TODO: add env variable for db_name
 		`INSERT INTO Properties (property_name, address, city, state, zipcode) VALUES (${mysql.escape(name)}, ${mysql.escape(address)}, ${mysql.escape(city)}, ${mysql.escape(state)}, ${mysql.escape(zip)}) `
 	);
 	return result;
@@ -340,7 +340,7 @@ async function assign_property_to_user(propertyId, userId) {
 	// TODO: need to error handle properly
 	if (propertyId && userId) {
 		var res = await query(
-			'AffordableHousingDataHub',
+			'AffordableHousingDataHub', //TODO: add env variable for db_name
 			`UPDATE Properties SET assigned_user_id = ${mysql.escape(userId)} WHERE id = ${propertyId}`
 		);
 		return res;
