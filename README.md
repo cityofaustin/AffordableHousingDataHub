@@ -9,10 +9,10 @@ AffordableHousingDataHub uses node.js on the backend and react.js on the front e
 2. open .env.default and save as '.env' file. By default git will ignore this file under the app folder.
 3. in the '.env' file update the entries
   - NODE_ENV = environment
-  - db_user = database user name
-  - db_pass = database user password
-  - db_host = host name of mysql server
-  - db_name = name of database to use
+  - DB_USER = database user name
+  - DB_PASSWORD = database user password
+  - DB_HOST = host name of mysql server
+  - DB_NAME = name of database to use
     - NOTE: MySQL will use internet socket (addr:port) 'localhost' for connections, and port 3306 by default.
     - NOTE: if you get this message: "Client does not support authentication protocol requested by server; consider upgrading  MySQL client" - use this sql statment to identify the user with the password: ALTER USER 'root' IDENTIFIED WITH mysql_native_password BY '[your password]'; if you are on windows you may have to use 'root'@'localhost' instead of just 'root'.
   - session_secret = secret text for sessions.
