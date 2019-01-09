@@ -347,6 +347,7 @@ function getPort() {
     if (process.env.NODE_ENV == 'PRODUCTION') {
         return 80;
     } else {
+        console.log('Listening on port 3000')
         return 3000;
     }
 }
@@ -381,7 +382,7 @@ app.listen(getPort(), () => {
     }
     //NOTE: do not log this during development, because we run node daemon and it continously restarts the app, it will continously log this - and we don't want to make the logs messy
     if (process.env.NODE_ENV == 'PRODUCTION') {
-        logger.log("info", "App is listening on port 3000...")
+        logger.log("info", "App is listening on port 80...")
         logBuildType();
     }
 });
