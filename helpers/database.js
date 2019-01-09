@@ -1,4 +1,3 @@
-const initConfig = require('../initConfig.js');
 const fs = require('fs');
 const mysql = require('mysql');
 const bcrypt = require('bcrypt');

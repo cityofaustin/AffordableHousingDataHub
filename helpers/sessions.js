@@ -1,7 +1,6 @@
 const expressSession = require("express-session");
 const fs = require('fs');
 const path = require('path');
-const initConfig = require("../initConfig.js");
 const dbHelper = require('./database.js');
 const thisFilename = 'sessions.js';
 
