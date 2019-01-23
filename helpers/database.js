@@ -1,3 +1,6 @@
+//use env variables
+require('dotenv').config();
+
 const fs = require('fs');
 const mysql = require('mysql');
 const bcrypt = require('bcrypt');
@@ -6,8 +9,7 @@ const thisFilename = 'database.js';
 const _ = require('underscore');
 const moment = require('moment');
 
-//use env variables
-const dotenv = require('dotenv').config();
+
 
 async function updateData(updateDataObj, propertyId, user_id) {
 	// TODO: if there is no propertyId, throw error
