@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "init-db": "sh database/scripts/init.sh",
     "build-webpack": "webpack --progress --colors --watch",
     "build-dev": "npm run build-webpack",
     "dev": "NODE_ENV=DEVELOPMENT nodemon --inspect app.js",

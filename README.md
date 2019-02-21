@@ -17,8 +17,9 @@ AffordableHousingDataHub uses node.js on the backend and react.js on the front e
     - NOTE: if you get this message: "Client does not support authentication protocol requested by server; consider upgrading  MySQL client" - use this sql statment to identify the user with the password: ALTER USER 'root' IDENTIFIED WITH mysql_native_password BY '[your password]'; if you are on windows you may have to use 'root'@'localhost' instead of just 'root'.
   - session_secret = secret text for sessions.
 
-4. make sure that you have mysql installed on whatever machine is running the app. the version used for this project was version: 8.0.12 MySQL Community Server. if you have to define a scheme or a database name, call it 'AffordableHousingDataHub'
-5. under app/sql you'll find development_db.sql. import this into your sql instance, and it will create / replace with a database called AffordableHousingDataHub. This will contain property data as of 12/18/18. It will also include one user account that you can use for testing. Email is 'test@gmail.com'. Password is 'password'.
+4. make sure that you have mysql installed on whatever machine is running the app. the version used for this project was version: 8.0.12 MySQL Community Server.
+
+5. Load initial data by running `npm run init-db`. This will create a database called 'AffordableHousingDataHub' and load in property data from 12/18/18. The script will also create a test user with email 'test@gmail.com' and password 'password'.
 
 6. create "logs" folder in root directory. add a logfile called "app.log" under the "logs" folder. error logging will be written here.
 7. set the environmental variable NODE_ENV to "DEVELOPMENT" for development and "PRODUCTION" for production. *globally* install the package `nodemon` so that it is accessible from your command line PATH. we use this to continuously watch development changes on the server. run `npm run dev` to run the backend in development. this will run the node server and watch for any backend changes.

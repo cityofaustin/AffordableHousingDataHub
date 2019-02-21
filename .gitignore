@@ -8,7 +8,7 @@ config_path.txt
 .DS_Store
 .env
 .vscode/*
-
+local/
 
 /sample_config
 /sql
