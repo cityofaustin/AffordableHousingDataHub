@@ -201,15 +201,6 @@ CREATE TABLE `Users` (
 ) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `Users`
---
-
-LOCK TABLES `Users` WRITE;
-/*!40000 ALTER TABLE `Users` DISABLE KEYS */;
-INSERT INTO `Users` VALUES (16,'josh','rudow','josh.rudow@austintexas.gov','nhcd','$2b$11$6I4M/23GKcQH6qnyMW4UgO7sqh2bzgnJxY9NWLvMpIugFfIty9mMe','GGbWE2UpxyhlcdKlHo3TM7srPZYtacW_'),(15,'rohan3','mathur','rohan@gmail.com','code for america','$2b$11$CG4BwRiLalTNknapmkdhyePzrc/v/r6323kWS6VQfLzOUuZz2esRS','xO4j3IwmIo0vNkL4N_82WKG4iP3i4LaE'),(17,'carson','barwinkel','carson.barwinkel@austintexas.gov','nhcd','$2b$11$BSEa8lHkw7cgWbY3kGWVv.r4q9WLklt7NecYIEnVqOcVXhayVIPqu','JwoOXTLgTsfqYWj4sL1IJ4vhspiFRmcZ'),(18,'travis','perlman','travis.perlman@austintexas.gov','nhcd','$2b$11$AVlmrAM2m8BOjbQGUzL9oeXrDtjliYjEsOlzIUBXM52/unxMVUgaW','DWDaKTvIeXUL7D60a4mZ3-oHW3RvAPVG'),(19,'','','atc_test_1','atc','$2b$11$CG4BwRiLalTNknapmkdhyePzrc/v/r6323kWS6VQfLzOUuZz2esRS','Zmtj0BKi9LtllmrZqj2tfv5cqn_alxhN'),(20,'','','atc_test_2','atc','$2b$11$CG4BwRiLalTNknapmkdhyePzrc/v/r6323kWS6VQfLzOUuZz2esRS','oph_u2pyVvJus2g_a0bGx8ErXhA3Dn0u'),(21,'Ali','Begazo','ali@housing-rights.org','ATC','$2b$11$5Td8MwptN.79VjPyJjs3t.4VCZQsCfWeO6aArWQ8WKikGJuLtZvjy','87D3WLLyNVvpqghWwkFCOhOui8oi9Dbi'),(22,'Maneesh','Chaku','maneesh.chaku@austintexas.gov','nhcd','$2b$11$CG4BwRiLalTNknapmkdhyePzrc/v/r6323kWS6VQfLzOUuZz2esRS','g29dBhjD9XmdcBp959vGVksdenr6qzPQ');
-/*!40000 ALTER TABLE `Users` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
